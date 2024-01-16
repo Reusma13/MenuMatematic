@@ -1,61 +1,106 @@
-﻿namespace MenuMatematic
+﻿using System;
+
+namespace MenuMatematic
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int num; 
-            Console.WriteLine("Escriu un numero del menu: ");
-            num = Convert.ToInt32(Console.ReadLine());
-            switch (num)
+
+            MostrarMenu();
+        }
+
+        static void MostrarMenu()
+        {
+            int num, numero1, numero2;
+            do
             {
-                case 0:
-                    Salir(num);
-                    break;
-                case 1:
-                    Maxima(num);
-                    break;
-                case 2:
-                    Mcd(num);
-                    break;
-                case 3:
-                    Mcm(num);
-                    break;
-                case 4:
-                    Factorial(num);
-                    break;
-                case 5:
-                    Factorial(num);
-                    break;
-                case 6:
-                    DivisioMajor(num);
-                    break;
-                case 7:
-                    EsPrimer(num);
-                    break;
-                case 8:
-                    NPrimersPrimers(num);
-                    break;
-                default:
-                    Console.WriteLine("Opcio no valida");
-                    break;
+                ColorMenu();
+                CrearMenu();
+                num = Convert.ToInt32(Console.ReadLine());
+                switch (num)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        Console.WriteLine("Digam el valor del primer numero: ");
+                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Digam el valor del segon numero: ");
+                        numero2 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(Maxima(ref numero1, ref numero2));
+                        TornarMenu();
+                        break;
+                    case 2:
+                        Console.WriteLine("Digam el valor del primer numero: ");
+                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Digam el valor del segon numero: ");
+                        numero2 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(Mcd(numero1, numero2));
+                        TornarMenu();
+                        break;
+                    case 3:
+                        Console.WriteLine("Digam el valor del primer numero: ");
+                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Digam el valor del segon numero: ");
+                        numero2 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(Mcm(numero1, numero2));
+                        TornarMenu();
+                        break;
+                    case 4:
+                        Console.WriteLine("Introdueix un numero: ");
+                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(Factorial(numero1));
+                        TornarMenu();
+                        break;
+                    case 5:
+                        Console.WriteLine("Digam el valor del primer numero: ");
+                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Digam el valor del segon numero: ");
+                        numero2 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(Combinatori(numero1, numero2));
+                        TornarMenu();
+                        break;
+                    case 6:
+                        Console.WriteLine("Introdueix un numero: ");
+                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(DivisioMajor(numero1));
+                        TornarMenu();
+                        break;
+                    case 7:
+                        Console.WriteLine("Introdueix un numero: ");
+                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(EsPrimer(numero1));
+                        TornarMenu();
+                        break;
+                    case 8:
+                        Console.WriteLine("Introdueix un numero: ");
+                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(NPrimersPrimers(numero1));
+                        TornarMenu();
+                        break;
+                    default:
+                        Console.WriteLine("Opcio no valida");
+                        TornarMenu();
+                        break;
+                }
+            } while (num != 0);
+
+        }
+        static bool Maxima(ref int numero1, ref int numero2)
+        {
+            bool maxim = true;
+            if (numero1 < numero2)
+            {
+                maxim = false;
+                int temp = numero1;
+                numero1 = numero2;
+                numero2 = temp;
             }
+            return maxim;
         }
-        static void Salir(int num)
+        static int Mcd(int numero1, int numero2)
         {
-
-        }
-        static void Maxima (int num)
-        {
-
-        }
-        static void Mcd(int num)
-        {
-            int numero1, numero2, maxDivisor = 1, cont = 1;
-            Console.WriteLine("Digam el valor del primer numero: ");
-            numero1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Digam el valor del segon numero: ");
-            numero2 = Convert.ToInt32(Console.ReadLine());
+            int maxDivisor = 1, cont = 1;
             while (cont <= numero1 && cont <= numero2)
             {
                 if (numero1 % cont == 0 && numero2 % cont == 0)
@@ -64,15 +109,11 @@
                 }
                 cont++;
             }
-            Console.WriteLine($"El MCD de {numero1} i {numero2} es de: {maxDivisor}");
+            return maxDivisor;
         }
-        static void Mcm(int num)
+        static int Mcm(int numero1, int numero2)
         {
-            int numero1, numero2, mcm = 1, cont;
-            Console.WriteLine("Digam el valor del primer numero: ");
-            numero1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Digam el valor del segon numero: ");
-            numero2 = Convert.ToInt32(Console.ReadLine());
+            int mcm = 1, cont;
             cont = numero1 * numero2;
             while (cont > numero1 && cont > numero2)
             {
@@ -82,49 +123,37 @@
                 }
                 cont--;
             }
-            Console.WriteLine($"El MCM es de: {mcm}");
+            return mcm;
         }
-        static void Factorial(int num)
+        static int Factorial(int num)
         {
-            int n, m, factorialN = 1, resultat = 0, contN = 1, contM = 1, contNM = 1, factorialM = 1, factoralNM = 1;
-            Console.WriteLine("Digam el valor de numero 1: ");
-            n = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Digam el valor de numero 2: ");
-            m = Convert.ToInt32(Console.ReadLine());
-            if (n >= m)
+            int res = 1;
+            for (int i = 1; i <= num; i++)
             {
-                for (int i = 1; i < n; i++)
+                res *= i;
+            }
+            return res;
+        }
+        static int Combinatori(int n, int m)
+        {
+            return Factorial(n) / (Factorial(m) * Factorial(n - m));
+        }
+        static int DivisioMajor(int num)
+        {
+            int divisorMayor = 1;
+            for (int i = 2; i <= num / 2; i++)
+            {
+                if (num % i == 0)
                 {
-                    factorialN = factorialN * i;
-                }
-                for (int i = 1; i < m; i++)
-                {
-                    factorialM = factorialM * i;
-                }
-                for (int i = 1; i < (n - m); i++)
-                {
-                    factoralNM = factoralNM * i;
+                    divisorMayor = i;
                 }
             }
-            resultat = factorialN / (factorialM * factoralNM);
-            Console.WriteLine($"El resultat de {n}! / {m}! * ({n} - {m})! es: {resultat}");
-            if (num == 5)
-                return
+            return divisorMayor;
         }
-        static void Combinatori(int num)
+        static bool EsPrimer(int numero)
         {
-            Factorial(num);
-            int resultat = Factorial(n) / (factorialM * factorialNM);
-        }
-        static void DivisioMajor(int num)
-        {
-
-        }
-        static void EsPrimer (int num)
-        {
-            int numero, cont = 1, resultat = 0;
-            Console.WriteLine("Posa un numero: ");
-            numero = Convert.ToInt32(Console.ReadLine());
+            bool primer = false;
+            int cont = 1, resultat = 0;
             while (cont <= numero)
             {
                 if (numero % cont == 0)
@@ -134,22 +163,17 @@
                 }
                 cont++;
             }
-            if (resultat > 2)
+
+            if (resultat < 2)
             {
-                Console.WriteLine("El numero no es primer");
+                primer = true;
             }
-            else
-            {
-                Console.WriteLine("El numero es primer");
-            }
+            return primer;
         }
-        static void NPrimersPrimers(int num)
+        static string NPrimersPrimers(int primers)
         {
-            int n = 1, primers, a, j, i = 1;
-
-            Console.WriteLine("Escriu un numero: ");
-            primers = Convert.ToInt32(Console.ReadLine());
-
+            int n = 1, a, j, i = 1;
+            string primersprimers = "";
             while (n < primers)
             {
                 a = 0;
@@ -163,10 +187,52 @@
                 if (a == 2)
                 {
                     n++;
-                    Console.WriteLine("" + i + "");
+                    primersprimers += i + " ";
                 }
                 i++;
             }
+            
+            return primersprimers;
         }
+        static void TornarMenu()
+        {
+            int i = 5;
+            while (i != 0)
+            {
+                Console.Write("\r");
+                Console.Write($"Tornant al menu: {i}'s");
+                Thread.Sleep(1000);
+                i--;
+            }
+        }
+        static void CrearMenu()
+        {
+            Console.WriteLine(
+               " _________________________________________________________   +------------------------------+ \n" +
+               "|               Menu Matematic Marc i Oscar               |  | //////////////////////////// | \n" +
+               "|---------------------------------------------------------|  +------------------------------+ \n" +
+               "|                     1) Maxim                            |  |                              | \n" +
+               "|                     2) MCD                              |  |                              | \n" +
+               "|                     3) MCM                              |  | [sto] [rcl] [&lt;--] [AC/ON] | \n" +
+               "|                     4) Factorial                        |  |                              | \n" +
+               "|                     5) Combinatori                      |  | [ ( ]  [ ) ]  [sqr]  [  /  ] | \n" +
+               "|                     6) Divisio Major                    |  |                              | \n" +
+               "|                     7) Numero Primer                    |  | [ 7 ]  [ 8 ]  [ 9 ]  [  *  ] | \n" +
+               "|                     8) NPrimers                         |  |                              | \n" +
+               "|                     0) Salir                            |  | [ 4 ]  [ 5 ]  [ 6 ]  [  -  ] | \n" +
+               "|_________________________________________________________|  |                              | \n" +
+               "                                                             | [ 1 ]  [ 2 ]  [ 3 ]  [  +  ] | \n" +
+               "                                                             |                              | \n" +
+               "                                                             | [ 0 ]  [ . ]  [+/-]  [  =  ] | \n" +
+               "                                                             |                              | \n" +
+               "                                                             +------------------------------+");
+            Console.Write("Escull una opcio: ");
+        }
+        static void ColorMenu()
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.Clear();
+        }
+        
     }
 }
