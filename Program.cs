@@ -1,4 +1,6 @@
-﻿namespace MenuMatematic
+﻿using System;
+
+namespace MenuMatematic
 {
     internal class Program
     {
@@ -11,15 +13,14 @@
         static void MostrarMenu()
         {
             int num, numero1, numero2;
-            Console.WriteLine("Escriu un numero del menu: ");
-            num = Convert.ToInt32(Console.ReadLine());
             do
             {
+                ColorMenu();
                 CrearMenu();
+                num = Convert.ToInt32(Console.ReadLine());
                 switch (num)
                 {
                     case 0:
-                        Salir(num);
                         break;
                     case 1:
                         Console.WriteLine("Digam el valor del primer numero: ");
@@ -27,6 +28,7 @@
                         Console.WriteLine("Digam el valor del segon numero: ");
                         numero2 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(Maxima(ref numero1, ref numero2));
+                        TornarMenu();
                         break;
                     case 2:
                         Console.WriteLine("Digam el valor del primer numero: ");
@@ -34,6 +36,7 @@
                         Console.WriteLine("Digam el valor del segon numero: ");
                         numero2 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(Mcd(numero1, numero2));
+                        TornarMenu();
                         break;
                     case 3:
                         Console.WriteLine("Digam el valor del primer numero: ");
@@ -41,11 +44,13 @@
                         Console.WriteLine("Digam el valor del segon numero: ");
                         numero2 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(Mcm(numero1, numero2));
+                        TornarMenu();
                         break;
                     case 4:
                         Console.WriteLine("Introdueix un numero: ");
                         numero1 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(Factorial(numero1));
+                        TornarMenu();
                         break;
                     case 5:
                         Console.WriteLine("Digam el valor del primer numero: ");
@@ -53,31 +58,32 @@
                         Console.WriteLine("Digam el valor del segon numero: ");
                         numero2 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(Combinatori(numero1, numero2));
+                        TornarMenu();
                         break;
                     case 6:
                         Console.WriteLine("Introdueix un numero: ");
                         numero1 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(DivisioMajor(numero1));
+                        TornarMenu();
                         break;
                     case 7:
                         Console.WriteLine("Introdueix un numero: ");
                         numero1 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(EsPrimer(numero1));
+                        TornarMenu();
                         break;
                     case 8:
                         Console.WriteLine("Introdueix un numero: ");
                         numero1 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(NPrimersPrimers(numero1));
+                        TornarMenu();
                         break;
                     default:
                         Console.WriteLine("Opcio no valida");
+                        TornarMenu();
                         break;
                 }
             } while (num != 0);
-
-        }
-        static void Salir(int num)
-        {
 
         }
         static bool Maxima(ref int numero1, ref int numero2)
@@ -185,6 +191,7 @@
                 }
                 i++;
             }
+            
             return primersprimers;
         }
         static void TornarMenu()
@@ -193,17 +200,38 @@
             while (i != 0)
             {
                 Console.Write("\r");
-                Console.WriteLine($"Tornant al menu: {i}'s");
+                Console.Write($"Tornant al menu: {i}'s");
                 Thread.Sleep(1000);
                 i--;
             }
-            MostrarMenu();
         }
-        static string CrearMenu()
+        static void CrearMenu()
         {
-            string Text =
-                "--------------------------------------------------------"
-                "--------------------------------------------------------"
+            Console.WriteLine(
+               " _________________________________________________________   +------------------------------+ \n" +
+               "|               Menu Matematic Marc i Oscar               |  | //////////////////////////// | \n" +
+               "|---------------------------------------------------------|  +------------------------------+ \n" +
+               "|                     1) Maxim                            |  |                              | \n" +
+               "|                     2) MCD                              |  |                              | \n" +
+               "|                     3) MCM                              |  | [sto] [rcl] [&lt;--] [AC/ON] | \n" +
+               "|                     4) Factorial                        |  |                              | \n" +
+               "|                     5) Combinatori                      |  | [ ( ]  [ ) ]  [sqr]  [  /  ] | \n" +
+               "|                     6) Divisio Major                    |  |                              | \n" +
+               "|                     7) Numero Primer                    |  | [ 7 ]  [ 8 ]  [ 9 ]  [  *  ] | \n" +
+               "|                     8) NPrimers                         |  |                              | \n" +
+               "|                     0) Salir                            |  | [ 4 ]  [ 5 ]  [ 6 ]  [  -  ] | \n" +
+               "|_________________________________________________________|  |                              | \n" +
+               "                                                             | [ 1 ]  [ 2 ]  [ 3 ]  [  +  ] | \n" +
+               "                                                             |                              | \n" +
+               "                                                             | [ 0 ]  [ . ]  [+/-]  [  =  ] | \n" +
+               "                                                             |                              | \n" +
+               "                                                             +------------------------------+");
+            Console.Write("Escull una opcio: ");
+        }
+        static void ColorMenu()
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.Clear();
         }
         
     }
