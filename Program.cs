@@ -6,7 +6,6 @@ namespace MenuMatematic
     {
         static void Main(string[] args)
         {
-
             MostrarMenu();
         }
 
@@ -23,62 +22,59 @@ namespace MenuMatematic
                     case 0:
                         break;
                     case 1:
-                        Console.WriteLine("Digam el valor del primer numero: ");
-                        numero1 = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Digam el valor del segon numero: ");
-                        numero2 = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        numero1 = IntroduirValor();
+                        numero2 = IntroduirValor();
                         Console.WriteLine(Maxima(ref numero1, ref numero2));
                         TornarMenu();
                         break;
                     case 2:
-                        Console.WriteLine("Digam el valor del primer numero: ");
-                        numero1 = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Digam el valor del segon numero: ");
-                        numero2 = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        numero1 = IntroduirValor();
+                        numero2 = IntroduirValor();
                         Console.WriteLine(Mcd(numero1, numero2));
                         TornarMenu();
                         break;
                     case 3:
-                        Console.WriteLine("Digam el valor del primer numero: ");
-                        numero1 = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Digam el valor del segon numero: ");
-                        numero2 = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        numero1 = IntroduirValor();
+                        numero2 = IntroduirValor();
                         Console.WriteLine(Mcm(numero1, numero2));
                         TornarMenu();
                         break;
                     case 4:
-                        Console.WriteLine("Introdueix un numero: ");
-                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        numero1 = IntroduirValor();
                         Console.WriteLine(Factorial(numero1));
                         TornarMenu();
                         break;
                     case 5:
-                        Console.WriteLine("Digam el valor del primer numero: ");
-                        numero1 = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Digam el valor del segon numero: ");
-                        numero2 = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        numero1 = IntroduirValor();
+                        numero2 = IntroduirValor();
                         Console.WriteLine(Combinatori(numero1, numero2));
                         TornarMenu();
                         break;
                     case 6:
-                        Console.WriteLine("Introdueix un numero: ");
-                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        numero1 = IntroduirValor();
                         Console.WriteLine(DivisioMajor(numero1));
                         TornarMenu();
                         break;
                     case 7:
-                        Console.WriteLine("Introdueix un numero: ");
-                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        numero1 = IntroduirValor();
                         Console.WriteLine(EsPrimer(numero1));
                         TornarMenu();
                         break;
                     case 8:
-                        Console.WriteLine("Introdueix un numero: ");
-                        numero1 = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        numero1 = IntroduirValor();
                         Console.WriteLine(NPrimersPrimers(numero1));
                         TornarMenu();
                         break;
                     default:
+                        Console.Clear();
                         Console.WriteLine("Opcio no valida");
                         TornarMenu();
                         break;
@@ -158,13 +154,12 @@ namespace MenuMatematic
             {
                 if (numero % cont == 0)
                 {
-                    Console.WriteLine("El residu es 0. ");
                     resultat++;
                 }
                 cont++;
             }
 
-            if (resultat < 2)
+            if (resultat <= 2)
             {
                 primer = true;
             }
@@ -230,8 +225,14 @@ namespace MenuMatematic
         }
         static void ColorMenu()
         {
-            Console.BackgroundColor = ConsoleColor.Red;
             Console.Clear();
+        }
+        static int IntroduirValor()
+        {
+            int numero;
+            Console.WriteLine("Digam el valor del primer numero: ");
+            numero = Convert.ToInt32(Console.ReadLine());
+            return numero;
         }
         
     }
