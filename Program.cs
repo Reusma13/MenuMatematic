@@ -15,7 +15,8 @@ namespace MenuMatematic
             do
             {
                 ColorMenu();
-                CrearMenu();
+                Console.WriteLine(CrearMenu());
+                Console.Write("Escull una opcio: ");
                 num = Convert.ToInt32(Console.ReadLine());
                 switch (num)
                 {
@@ -186,7 +187,6 @@ namespace MenuMatematic
                 }
                 i++;
             }
-            
             return primersprimers;
         }
         static void TornarMenu()
@@ -200,9 +200,9 @@ namespace MenuMatematic
                 i--;
             }
         }
-        static void CrearMenu()
+        static string CrearMenu()
         {
-            Console.WriteLine(
+            string TextMenu =
                " _________________________________________________________   +------------------------------+ \n" +
                "|               Menu Matematic Marc i Oscar               |  | //////////////////////////// | \n" +
                "|---------------------------------------------------------|  +------------------------------+ \n" +
@@ -220,11 +220,13 @@ namespace MenuMatematic
                "                                                             |                              | \n" +
                "                                                             | [ 0 ]  [ . ]  [+/-]  [  =  ] | \n" +
                "                                                             |                              | \n" +
-               "                                                             +------------------------------+");
-            Console.Write("Escull una opcio: ");
+               "                                                             +------------------------------+ ";
+            return TextMenu;
         }
         static void ColorMenu()
         {
+            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.Clear();
         }
         static int IntroduirValor()
